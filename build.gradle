@@ -53,3 +53,11 @@ tasks.named('bootBuildImage') {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('copyPrivate') {
+    copy {
+        from './mission01-board-config'
+        include "application.yml"
+        into 'src/main/resources'
+    }
+}

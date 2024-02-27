@@ -1,0 +1,3 @@
+[submodule "mission01-board-config"]
+	path = mission01-board-config
+	url = https://github.com/YirangKim/mission01-board-config.git
