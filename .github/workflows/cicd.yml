@@ -7,7 +7,7 @@ on:
   #  branches: ["develop"]
 
 jobs:
-  test:
+  startup:
     runs-on: ubuntu-latest
     steps:
       # 소스코드 복사 (서브모듈 추가)
