@@ -43,7 +43,7 @@ public class PostController {
 
 
     @PostMapping
-    @Operation(summary = "게시글글 작성", description = "제목(title), 내용(content) 입력해주세요")
+    @Operation(summary = "게시글 작성", description = "제목(title), 내용(content) 입력해주세요")
     public ResponseEntity<CreatePostResponse> postCreate(@RequestBody CreatePostRequest request) {
 
         CreatePostResponse response = postService.createPost(request);

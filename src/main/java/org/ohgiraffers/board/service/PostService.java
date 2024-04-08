@@ -34,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostService {
     private final PostRepository postRepository;
 
+    //Create 등록
     @Transactional
     public CreatePostResponse createPost(CreatePostRequest request) {
 
@@ -47,6 +48,7 @@ public class PostService {
         return new CreatePostResponse(savedPost.getPostId(), savedPost.getTitle(), savedPost.getContent());
     }
 
+    //Read ID조회
     public ReadPostResponse readPostById(Long postId) {
 
         Post foundPost = postRepository.findById(postId)
@@ -55,6 +57,15 @@ public class PostService {
         return new ReadPostResponse(foundPost.getPostId(), foundPost.getTitle(), foundPost.getContent());
     }
 
+    //Read 전체조회
+    public Page<ReadPostResponse> readAllPost(Pageable pageable) {
+
+        Page<Post> postsPage = postRepository.findAll(pageable);
+
+        return postsPage.map(post -> new ReadPostResponse(post.getPostId(),post.getTitle(),post.getContent()));
+    }
+
+    // Update 수정
     @Transactional
     public UpdatePostResponse updatePost(Long postId, UpdatePostRequest request) {
 
@@ -67,6 +78,7 @@ public class PostService {
         return new UpdatePostResponse(foundPost.getPostId(), foundPost.getTitle(), foundPost.getContent());
     }
 
+    // Delete 삭제
     @Transactional
     public DeletePostResponse deletePost(Long postId) {
 
@@ -79,12 +91,7 @@ public class PostService {
     }
 
 
-    public Page<ReadPostResponse> readAllPost(Pageable pageable) {
 
-        Page<Post> postsPage = postRepository.findAll(pageable);
-
-        return postsPage.map(post -> new ReadPostResponse(post.getPostId(),post.getTitle(),post.getContent()));
-    }
 }
 
 
