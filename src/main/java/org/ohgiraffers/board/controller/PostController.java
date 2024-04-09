@@ -46,13 +46,24 @@ public class PostController {
     @Operation(summary = "게시글 작성", description = "제목(title), 내용(content) 입력해주세요")
     public ResponseEntity<CreatePostResponse> postCreate(@RequestBody CreatePostRequest request) {
 
-        CreatePostResponse response = postService.createPost(request);
+        /**
+         * @RequestBody DTO 받아오고
+         * CreatePostResponse
+         *
+         * @@RequestParams
+         * */
+        CreatePostResponse response = postService.createPost(request); //CreatePostResponse
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+        // ResponseEntity<>응답형식, 테이블 아님
+        // Response 받는 응답 형식
     }
 
     @GetMapping("/{postId}")
     public ResponseEntity<ReadPostResponse> postRead(@PathVariable Long postId) {
+
+        /**@PathVariable
+         *  */
 
         ReadPostResponse response = postService.readPostById(postId);
 

@@ -38,14 +38,24 @@ public class PostService {
     @Transactional
     public CreatePostResponse createPost(CreatePostRequest request) {
 
+        /** builder 등록
+         * request 사용자 한테 받는 DTO
+         * CreatePostResponse Controller 보내는 DTO
+         * requestDTO를 POST 엔티티 객체로 바꿔줌
+         * builder 직접 값 입력*/
+
         Post post = Post.builder()
-                .title(request.getTitle())
+                .title(request.getTitle()) //getTitle DTO 값
                 .content(request.getContent())
                 .build();
 
         Post savedPost = postRepository.save(post);
 
-        return new CreatePostResponse(savedPost.getPostId(), savedPost.getTitle(), savedPost.getContent());
+        // return 출력
+        return new CreatePostResponse(
+                savedPost.getPostId(),
+                savedPost.getTitle(),
+                savedPost.getContent());
     }
 
     //Read ID조회
