@@ -42,6 +42,7 @@ public class PostController {
     private final PostService postService;
 
 
+    //등록
     @PostMapping
     @Operation(summary = "게시글 작성", description = "제목(title), 내용(content) 입력해주세요")
     public ResponseEntity<CreatePostResponse> postCreate(@RequestBody CreatePostRequest request) {
@@ -50,7 +51,7 @@ public class PostController {
          * @RequestBody DTO 받아오고
          * CreatePostResponse
          *
-         * @@RequestParams
+         * @RequestParams
          * */
         CreatePostResponse response = postService.createPost(request); //CreatePostResponse
 
@@ -59,6 +60,7 @@ public class PostController {
         // Response 받는 응답 형식
     }
 
+    //조회
     @GetMapping("/{postId}")
     public ResponseEntity<ReadPostResponse> postRead(@PathVariable Long postId) {
 
@@ -70,22 +72,7 @@ public class PostController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/{postId}")
-    public ResponseEntity<UpdatePostResponse> postUpdate(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
-
-        UpdatePostResponse response = postService.updatePost(postId, request);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{postId}")
-    public ResponseEntity<DeletePostResponse> postDelete(@PathVariable Long postId) {
-
-        DeletePostResponse response = postService.deletePost(postId);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
+    //전체 조회
     @GetMapping
     public ResponseEntity<Page<ReadPostResponse>> postReadAll(
             @PageableDefault(size = 5, sort = "postId", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -94,6 +81,25 @@ public class PostController {
 
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
+
+    //수정
+    @PutMapping("/{postId}")
+    public ResponseEntity<UpdatePostResponse> postUpdate(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
+
+        UpdatePostResponse response = postService.updatePost(postId, request);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    //삭제
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<DeletePostResponse> postDelete(@PathVariable Long postId) {
+
+        DeletePostResponse response = postService.deletePost(postId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }
 
 
